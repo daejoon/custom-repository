@@ -5,6 +5,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface UserRepository extends CrudRepository<UserEntity, Long>, UserCustomRepository {
+public interface UserRepository extends CrudRepository<UserEntity, Long>,
+                                        UserAgeCustomRepository,
+                                        UserPasswordCustomRepository {
     Optional<UserEntity> findByName(String name);
 }

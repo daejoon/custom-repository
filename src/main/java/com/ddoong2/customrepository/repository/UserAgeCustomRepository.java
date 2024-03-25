@@ -4,6 +4,6 @@ import com.ddoong2.customrepository.entity.UserEntity;
 
 import java.util.Optional;
 
-public interface UserCustomRepository {
+public interface UserAgeCustomRepository {
     Optional<UserEntity> findByAge(Integer age);
 }
