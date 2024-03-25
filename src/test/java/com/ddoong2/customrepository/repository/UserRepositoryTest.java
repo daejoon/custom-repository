@@ -41,7 +41,7 @@ class UserRepositoryTest {
 
         // then
         assertThat(actual).hasSize(2);
-        assertThat(actual).containsKeys("userCustomRepository", "userRepository");
+        assertThat(actual).containsKeys("userAgeCustomRepository", "userRepository");
     }
 
     @Test

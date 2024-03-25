@@ -11,7 +11,7 @@ import java.util.Optional;
 import static com.ddoong2.customrepository.entity.QUserEntity.userEntity;
 
 @RequiredArgsConstructor
-@Component("userCustomRepository")
+@Component("userAgeCustomRepository")
 public class UserAgeCustomRepositoryImpl implements UserAgeCustomRepository {
 
     private final JPAQueryFactory query;
