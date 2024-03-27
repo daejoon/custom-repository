@@ -6,6 +6,40 @@ Spring Data JPA와 Custom Repository를 Fragment 형식으로 복합적으로 �
 관습적으로 Custom Repository에 @Component, @Repository를 붙이는데 Bean을 선언하지 않아도
 Spring Boot에서 Bean으로 등록해준다.
 
+```java
+class RepositoryBeanDefinitionBuilder {
+...
+
+    private void potentiallyRegisterFragmentImplementation(RepositoryConfiguration<?> repositoryConfiguration,
+                                                           RepositoryFragmentConfiguration fragmentConfiguration) {
+
+        String beanName = fragmentConfiguration.getImplementationBeanName();
+
+        // Already a bean configured?
+        if (registry.containsBeanDefinition(beanName)) {
+
+            if (logger.isDebugEnabled()) {
+                logger.debug(String.format("Repository fragment implementation already registered: %s", beanName));
+            }
+
+            return;
+        }
+
+        fragmentConfiguration.getBeanDefinition().ifPresent(bd -> {
+
+            if (logger.isDebugEnabled()) {
+                logger.debug(String.format("Registering repository fragment implementation: %s %s", beanName,
+                                           fragmentConfiguration.getClassName()));
+            }
+
+            bd.setSource(repositoryConfiguration.getSource());
+            registry.registerBeanDefinition(beanName, bd);
+        });
+    }
+...
+}
+```
+
 ## Custom Repository
 
 * @Repository @Component를 붙이지 않아도 자동으로 Bean로 생성된다.
